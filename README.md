@@ -1,3 +1,5 @@
+2da tarea apartir de la linea 48
+
 Estructura del componente: users.component (tabla)
 Imports:
 
@@ -41,3 +43,45 @@ Preguntas de Reflexión
 ¿Por qué es importante separar la lógica de negocio de la lógica de presentación? Separar estas dos lógicas permite una mejor organización y escalabilidad del código, facilitando el mantenimiento y las futuras modificaciones sin afectar la interfaz de usuario.
 
 ¿Qué otros tipos de datos o APIs podrías integrar en un proyecto como este? Se podrían integrar APIs de productos, clima, noticias, o cualquier otro tipo de dato estructurado que pueda ser consumido mediante HTTP.
+
+
+----------------------------------------------------------------------------------------------------Ejercicio Login  - Consumir APIS de terceros
+
+1. Interfaz UserInterface
+Esta interfaz define la estructura esperada de los objetos de usuario que se manejan en el sistema. 
+2. Servicio UserService
+El UserService es el encargado de obtener los datos de los usuarios desde una fuente (API o archivo).
+3. Componente LoginComponent
+El LoginComponent conecta la lógica del servicio con la interfaz de usuario. Sus principales características son:
+
+Propiedades:
+
+inputUsername: Almacena el nombre de usuario ingresado.
+inputPassword: Almacena la contraseña ingresada.
+error: Mensaje de error predeterminado para credenciales incorrectas.
+Método onSubmit():
+
+Llama al servicio getUsers para obtener la lista de usuarios.
+Busca un usuario con el nombre y la contraseña proporcionados.
+Si encuentra un usuario coincidente:
+Redirige al usuario a la ruta /home.
+Si no lo encuentra:
+Muestra un mensaje de error mediante showAlert().
+Método privado showAlert(message: string):
+
+Muestra una alerta en pantalla con el mensaje recibido como parámetro.
+4. Recursos Importados
+FormsModule y NgIf:
+Utilizados para manejar formularios y condiciones en el template del componente.
+Router:
+Permite la navegación entre diferentes vistas de la aplicación.
+UserService:
+Gestiona los datos de los usuarios.
+5. Flujo del Método onSubmit()
+El usuario ingresa su nombre de usuario y contraseña.
+El método onSubmit() se activa al enviar el formulario.
+Se consulta la lista de usuarios mediante el servicio.
+Se valida si las credenciales ingresadas coinciden con algún usuario registrado:
+Coincidencia encontrada: Redirige a /home.
+Sin coincidencia: Muestra el mensaje de error Credenciales incorrectas.
+Si ocurre un error en la solicitud, muestra un mensaje indicando problemas de conexión.
