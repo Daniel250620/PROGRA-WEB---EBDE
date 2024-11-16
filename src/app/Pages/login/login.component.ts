@@ -10,20 +10,42 @@ import { UserInterface } from '../../interfaces/users.interface';
   standalone: true,
   imports: [FormsModule, NgIf],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  username: string = '';
-  password: string = '';
-  error: string = '';
+  inputUsername: string = ''; // Variable para capturar el nombre de usuario ingresado
+  inputPassword: string = ''; // Variable para capturar la contraseña ingresada
+  error: string = 'Credenciales incorrectas, por favor verifique.'; 
+  
 
   constructor(private userService: UserService, private router: Router) {}
 
   onSubmit() {
-    if (this.username === 'admin' && this.password === '1234') {
-      this.router.navigate(['/home']);
-    } else {
-      this.error = 'Usuario o contraseña incorrectos';
-    }
+    this.userService.getUsers().subscribe({
+      next: (userList: UserInterface[]) => {
+        const matchedUser = userList.find(
+          (item) =>
+            item.name === this.inputUsername &&
+            item.password === this.inputPassword
+        );
+
+        if (matchedUser) {
+          // Redirigir al dashboard si las credenciales son correctas
+          this.router.navigate(['/home']);
+        } else {
+          // Credenciales incorrectas: mostrar mensaje de error
+          this.showAlert(this.error);
+        }
+      },
+      error: (err) => {
+        // Gestión de errores en la solicitud
+        this.showAlert('No se pudo establecer conexión. Intente nuevamente.');
+        console.error(err);
+      },
+    });
+  }
+
+  private showAlert(message: string): void {
+    window.alert(message);
   }
 }

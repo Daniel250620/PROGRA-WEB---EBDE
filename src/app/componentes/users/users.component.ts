@@ -11,7 +11,7 @@ import { UserInterface } from '../../interfaces/users.interface';
     <div class="table-container">
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title">User Table</h2>
+          <h2 class="card-title">Tabla de usuarios</h2>
         </div>
         <div class="card-content">
           <ng-container *ngIf="loading; else loadedContent">
@@ -125,7 +125,7 @@ import { UserInterface } from '../../interfaces/users.interface';
       .btn {
         padding: 8px 16px;
         border: none;
-        background-color: #007bff;
+        background-color: #00ff00;
         color: white;
         font-size: 14px;
         cursor: pointer;
