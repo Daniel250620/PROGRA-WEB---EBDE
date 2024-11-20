@@ -7,8 +7,8 @@ import { UserInterface } from '../../interfaces/users.interface';
   selector: 'app-users',
   standalone: true,
   imports: [CommonModule],
-  templateUrl:'./users.component.html',
-  styleUrls: ['./users.component.css']
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
   users: UserInterface[] = [];
@@ -16,8 +16,17 @@ export class UsersComponent implements OnInit {
   loading = true;
   currentPage = 1;
   pageSize = 5;
+  sortDirection: { [key: string]: boolean } = {};
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) {
+    // Inicializa el objeto de dirección de ordenamiento
+    this.sortDirection = {
+      id: false,
+      name: false,
+      email: false,
+      role: false,
+    };
+  }
 
   ngOnInit() {
     this.loadUsers();
@@ -34,7 +43,7 @@ export class UsersComponent implements OnInit {
       error: (error) => {
         console.error('Error fetching users:', error);
         this.loading = false;
-      }
+      },
     });
   }
 
@@ -68,5 +77,19 @@ export class UsersComponent implements OnInit {
 
   trackByUserId(index: number, user: UserInterface): number {
     return user.id;
+  }
+  sortTable(column: keyof UserInterface) { // Cambiado aquí
+    this.sortDirection[column] = !this.sortDirection[column]; // Cambia la dirección de orden
+    const direction = this.sortDirection[column] ? 1 : -1; // 1 para ascendente, -1 para descendente
+
+    this.displayedUsers.sort((a, b) => {
+      if (a[column] < b[column]) {
+        return -1 * direction;
+      }
+      if (a[column] > b[column]) {
+        return 1 * direction;
+      }
+      return 0;
+    });
   }
 }
