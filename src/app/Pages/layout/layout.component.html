@@ -29,35 +29,13 @@
         does require a slight bit of JS.
         -->
       <li>
-        <a href="#">
-          <label for="menuCheckbox" onclick="this.parentNode.click();"
-            >Home</label
-          >
-        </a>
-      </li>
-      <li>
-        <a href="#about">
-          <label for="menuCheckbox" onclick="this.parentNode.click();"
-            >About</label
-          >
-        </a>
-      </li>
-
-      <!-- These just close the menu -->
-      <li>
-        <label for="menuCheckbox"><a>Info</a></label>
-      </li>
-      <li>
-        <label for="menuCheckbox"><a>Contact</a></label>
-      </li>
-
-      <!-- Or just use regular URLs -->
-      <li>
-        <a href="https://erikterwan.com/" target="_blank">Show me more</a>
-      </li>
+        <li><a routerLink="/home/users">Tabla</a></li>
+        <li><a routerLink="/home/perfil">Perfil</a></li>
+        <li><a routerLink="/login">Logout</a></li>
     </ul>
   </div>
 </nav>
 <main>
-  <app-users></app-users>
+  <div class="text-center">Bienvenidoo</div>
+  <router-outlet></router-outlet>
 </main>
