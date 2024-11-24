@@ -30,6 +30,14 @@ export class LoginComponent {
         );
 
         if (matchedUser) {
+          // Usuario y contraseña correctos: almacenar información en localStorage
+          localStorage.setItem('loggedUser', JSON.stringify(matchedUser));
+          this.router.navigate(['/dashboard']);
+        } else {
+          // Usuario o contraseña incorrectos: mostrar alerta
+          window.alert('Usuario o contraseña incorrectos');
+        }
+        if (matchedUser) {
           // Redirigir al dashboard si las credenciales son correctas
           this.router.navigate(['/home']);
         } else {
