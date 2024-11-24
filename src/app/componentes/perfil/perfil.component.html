@@ -4,7 +4,7 @@
         
         <div class="col-md-7">
             
-            <div class="card p-3 py-4">
+            <div class="card p-3 py-4" *ngIf="user">
                 
                 <div class="text-center">
                     <img [src]="user?.avatar || 'https://via.placeholder.com/150'" alt="User Profile Picture">
@@ -30,7 +30,7 @@
                     
                     <div class="buttons">
                         
-                        <button class="btn btn-outline-primary px-4">Message</button>
+                        <button class="btn btn-danger px-4 ms-3" (click)="logout()">Logout</button>
                         <button class="btn btn-primary px-4 ms-3">Contact</button>
                     </div>
                     

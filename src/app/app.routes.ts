@@ -15,8 +15,9 @@ export const routes: Routes = [
         path: 'home',
         component: LayoutComponent,
         children: [ // Define las subrutas aquí
-            { path: 'users', component: UsersComponent },
-            { path: 'perfil', component: PerfilComponent }
+            { path: '', redirectTo: 'perfil', pathMatch: 'full'  },
+            { path: 'perfil', component: PerfilComponent },
+            { path: 'users', component: UsersComponent }
         ]
     }
 ];
