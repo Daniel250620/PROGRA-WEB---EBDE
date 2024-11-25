@@ -1,0 +1,109 @@
+<div class="table-container">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Game List</h2>
+      <div class="header-badge">Total: {{ totalGames }}</div>
+    </div>
+    <div class="card-content">
+      <ng-container *ngIf="loading; else loadedContent">
+        <div class="skeleton-container">
+          <div *ngFor="let item of skeletonItems" class="skeleton"></div>
+        </div>
+      </ng-container>
+      <ng-template #loadedContent>
+        <div class="table-responsive">
+          <table class="user-table">
+            <thead>
+              <tr>
+                <th (click)="sort('id')" class="sortable-header">
+                  ID
+                  <span class="sort-icon" [ngClass]="getSortClass('id')">
+                    {{
+                      getSortClass("id") === "ascending"
+                        ? "↑"
+                        : getSortClass("id") === "descending"
+                        ? "↓"
+                        : "↕"
+                    }}
+                  </span>
+                </th>
+                <th (click)="sort('title')" class="sortable-header">
+                  Name
+                  <span class="sort-icon" [ngClass]="getSortClass('title')">
+                    {{
+                      getSortClass("title") === "ascending"
+                        ? "↑"
+                        : getSortClass("title") === "descending"
+                        ? "↓"
+                        : "↕"
+                    }}
+                  </span>
+                </th>
+                <th>Image</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let game of displayedGames; trackBy: trackByGameId"
+                class="game-row"
+              >
+                <td class="id-cell">
+                  #{{ game.id.toString().padStart(3, "0") }}
+                </td>
+                <td class="name-cell">{{ game.title | titlecase }}</td>
+                <td class="image-cell">
+                  <div class="image-container">
+                    <img [src]="game.thumbnail" [alt]="game.title" class="avatar" />
+                  </div>
+                </td>
+                <td class="actions-cell">
+                  <button
+                    (click)="viewGameInfo(game)"
+                    class="action-btn info-btn"
+                  >
+                    Info
+                  </button>
+                  <button (click)="editGame(game)" class="action-btn edit-btn">
+                    Edit
+                  </button>
+                  <button
+                    (click)="deleteGame(game)"
+                    class="action-btn delete-btn"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <span class="pagination-info"
+            >Showing {{ startIndex + 1 }} to {{ endIndex }} of
+            {{ totalGames }} entries</span
+          >
+          <div class="pagination-buttons">
+            <button
+              (click)="previousPage()"
+              [disabled]="currentPage === 1"
+              class="pagination-btn"
+              [class.disabled]="currentPage === 1"
+            >
+              Previous
+            </button>
+            <span class="page-number">Page {{ currentPage }}</span>
+            <button
+              (click)="nextPage()"
+              [disabled]="currentPage * pageSize >= totalGames"
+              class="pagination-btn"
+              [class.disabled]="currentPage * pageSize >= totalGames"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
