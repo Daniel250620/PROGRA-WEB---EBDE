@@ -2,6 +2,31 @@
 <!--   24th of November 2015   -->
 <!--        MIT License        -->
 <nav role="navigation">
+  <header class="top-right">
+    <div class="user-profile" *ngIf="user">
+      <div class="user-info">
+        <button class="btn btn-danger" (click)="logout()">salir</button>
+        <span class="user-name">{{ user?.name }}</span>
+        <div class="profile-image">
+          <img [src]="user?.avatar" [alt]="user?.name" />
+        </div>
+      </div>
+      <div class="dropdown-menu" *ngIf="showDropdown">
+        <div class="dropdown-header">
+          <img [src]="user?.avatar" [alt]="user?.name" />
+          <div class="user-details">
+            <span class="name">{{ user?.name }}</span>
+            <span class="email">{{ user?.email }}</span>
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-item" [routerLink]="'/dashboard/profile'">
+          Ver Perfil
+        </div>
+        <div class="dropdown-item" (click)="logout()">Cerrar Sesión</div>
+      </div>
+    </div>
+  </header>
   <div id="menuToggle">
     <!--
       A fake / hidden checkbox is used as click reciever,
@@ -28,9 +53,10 @@
         We can use a label here to close upon click (when doing same page navigation), this
         does require a slight bit of JS.
         -->
-      <li>
-        <li><a routerLink="/home/perfil">Perfil</a></li>
-        <li><a routerLink="/home/users">Tabla</a></li>
+      <li></li>
+      <li><a routerLink="/home/perfil">Perfil</a></li>
+      <li><a routerLink="/home/pokemon">Pokemons</a></li>
+      <li><a routerLink="/home/users">Usuarios</a></li>
     </ul>
   </div>
 </nav>
