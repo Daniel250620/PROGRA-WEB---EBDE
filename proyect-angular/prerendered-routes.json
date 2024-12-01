@@ -1,9 +1,0 @@
-{
-  "routes": [
-    "/home",
-    "/home/perfil",
-    "/home/pokemon",
-    "/home/users",
-    "/login"
-  ]
-}
